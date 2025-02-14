@@ -143,8 +143,39 @@ const getUser= asyncHandler(async(req,res)=>{
     const user= await User.findById(req.user._id).select("-password");
     res.status(200).json(user);
 });
-const test= asyncHandler(async(req,res)=>{
-    res.send("test user");
+const getuserBalance= asyncHandler(async(req,res)=>{
+    const user = await User.findById(req.user._id);
+
+    if(!user){
+        res.status(404);
+        throw new Error("User not found");
+    }
+    res.status(200).json({
+        balance: user.balance,
+    });
+});
+
+const getAllUsers= asyncHandler(async(req,res)=>{
+    const userList= await User.find({});
+    if(!userList.length){
+        return res.status(404).json({message:"No user found!"});
+    }
+    res.status(200).json(userList);
+});
+
+const estimateIncome= asyncHandler(async(req,res)=>{
+    try{
+        const admin = await User.findOne({role: "admin"});
+        if(!admin){
+            return res.status(404).json({message:"No user found!"});
+        }
+        const commissionBalance= admin.commissionBalance;
+        res.status(200).json({commissionBalance});
+    }
+    catch(error){
+        res.status(500).json({error: "Internal server error"});
+
+    }
 });
 
 module.exports = {
@@ -154,4 +185,7 @@ module.exports = {
     logoutuser,
     loginAsSeller,
     getUser,
+    getuserBalance,
+    getAllUsers,
+    estimateIncome
 };
