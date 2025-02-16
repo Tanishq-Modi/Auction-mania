@@ -33,4 +33,14 @@ const isAdmin = (req,res,next)=>{
     }
 }
 
-module.exports = { protect, isAdmin };
+const isSeller = (req,res,next)=>{
+    if(req.user && req.user.role ==="seller"|| req.user.role ==="admin"){
+        next();
+    }
+    else{
+        res.status(403);
+        throw new Error("Acess Denied, You are not an seller");
+    }
+}
+
+module.exports = { protect, isAdmin, isSeller };
