@@ -7,6 +7,7 @@ const path= require("path")
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRoute")
 const productRoute = require("./routes/prodcutRoute")
+const biddingRoute = require("./routes/biddingRoute")
 const errorHandler = require("./middleware/errorMiddleWare")
 const app=express();
 
@@ -31,6 +32,7 @@ app.use(
 const PORT= process.env.PORT || 5000;
 app.use("/api/users",userRoute)
 app.use("/api/product",productRoute)
+app.use("/api/bidding",biddingRoute)
 
 app.use(errorHandler);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
