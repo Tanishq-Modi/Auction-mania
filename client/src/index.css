@@ -63,28 +63,30 @@ body{
   /* Up Down animation effect */
   .vert-move {
     animation: mover 1s infinite alternate ease-in-out;
-  }
-  .horiz-move {
-    animation: mover-horizontal is infinite alternate ease-in-out;
-  }
+}
 
-  @keyframes mover {
+.horiz-move {
+    animation: mover-horizontal 1s infinite alternate ease-in-out; /* ✅ Fixed */
+}
+
+@keyframes mover {
     0% {
-      transform: translateY(0);
+        transform: translateY(0);
     }
     100% {
-      transform: translateY(-10px);
+        transform: translateY(-10px);
     }
-  }
-  
-  @keyframes mover-horizontal {
+}
+
+@keyframes mover-horizontal {
     0% {
-      transform: translateX(0);
+        transform: translateX(0);
     }
     100% {
-      transform: translateX(-10px);
+        transform: translateX(-10px);
     }
-  }
+}
+
   
   .register .content {
     position: relative;

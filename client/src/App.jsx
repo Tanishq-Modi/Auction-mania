@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Layout, Home } from "./routes/index";
+import { Layout, Home} from "./routes/index";
 
 function App() {
   return (

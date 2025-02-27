@@ -3,7 +3,7 @@ import { Container, CustomNavLinkList } from "./Design";
 import { IoSearchOutline } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 
 
 export const Header = () => {
@@ -45,24 +45,47 @@ export const Header = () => {
         <nav className="p-4 flex justify-between items-center relative">
           <div className="flex items-center gap-14">
             <div>
-              <img src="../images/common/header-logo.png" alt="logo" className="h-11" />
+              {isHomePage && !isScrolled ? <img src="../images/common/header-logo.png" alt="logo" className="h-11" /> : <img src="../images/common/header-logo2.png" alt="logo" className="h-11" />
+              }
             </div>
             <div className="hidden lg:flex items-center justify-between gap-8">
-              {menulists.map((list,index)=>(
-                <li key={index} className="capitalize list-none text-white">
-                  <CustomNavLinkList href={list.path}>{list.link}</CustomNavLinkList>
-                </li>
-              ))}
+            {menulists.map((list, index) => (
+              <li key={index} className="capitalize list-none">
+                <CustomNavLinkList 
+                  href={list.path} 
+                  isActive={location.pathname === list.path} 
+                  className={`${isScrolled || !isHomePage ? "text-black" : "text-white"}`}
+                >
+                  {list.link}
+                </CustomNavLinkList>
+              </li>
+            ))}
             </div>
           </div>
           
           <div className="flex items-center gap-8 icons">
             <div className="hidden lg:flex lg:items-center lg:gap-8 text-white">
-            <IoSearchOutline size={23} />
-            <CustomNavLinkList href={"/seller/login"}>Become a seller</CustomNavLinkList>
-            <CustomNavLinkList href={"/login"}>Sign in</CustomNavLinkList>
-            <CustomNavLinkList href={"/register"}>Join</CustomNavLinkList>
+            <IoSearchOutline size={23} className={`${isScrolled || !isHomePage ? "text-black" : "text-white"}`}/>
+            <CustomNavLinkList href={"/seller/login"} className={`${isScrolled || !isHomePage ? "text-black" : "text-white"}`}>Become a seller</CustomNavLinkList>
+            <CustomNavLinkList href={"/login"} className={`${isScrolled || !isHomePage ? "text-black" : "text-white"}`}>Sign in</CustomNavLinkList>
+            <CustomNavLinkList href={"/register"} className={`${isScrolled || !isHomePage ? " bg-primary text-white" : "text-primary bg-white"} px-8 py-2 rounded-full shadow-md`} >Join</CustomNavLinkList>
             </div>
+          </div>
+          <div className={`icon flex items-center  justify-center gap-6 ${isScrolled || !isHomePage ? "text-primary":"text-white" }`}>
+            <button onClick={toggleMenu} className="lg:hidden w-10 h-10 flex justify-center items-center bg-black text-white focus:outline-none">
+            {isOpen ? <AiOutlineClose size={24}/>: <AiOutlineMenu size={24} />}
+            </button>
+          </div>
+          <div href={menuRef} className={`lg:flex lg:items-center lg:w-auto w-full p-5 absolute right-0 top-full menu-container ${isOpen ? "open":"closed"}`}>
+            {menulists.map((list, index) => (
+              <li key={index} className="uppercase list-none">
+                <CustomNavLinkList 
+                  href={list.path} className="text-white"
+                >
+                  {list.link}
+                </CustomNavLinkList>
+              </li>
+            ))}
           </div>
         </nav>
       </Container>
