@@ -18,8 +18,7 @@ export const Hero = () => {
               Build, sell & collect digital items.
             </Title>
             <Body className="leading-7 text-gray-200 my-8">
-              Nulla facilisi. Maecenas ac tellus ut ligula interdum convallis. Nullam dapibus on erat in dolor posuere, none hendrerit lectus ornare. Suspendisse sit amet turpina sagittis, ultrices
-              dui et, aliquam urna.
+            Discover a marketplace where creativity meets commerce. Buy, sell, and collect digital treasures effortlessly—because every piece tells a story.
             </Body>
             <SearchBox />
             <div className="flex items-center gap-8 my-8">

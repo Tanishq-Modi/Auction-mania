@@ -78,7 +78,7 @@ export const menulists = [
     {
       id: 1,
       image: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/09/nuron-art-demo-image-7-768x768.png",
-      title: "Blown Glass Creations for Every Occasion",
+      title: "Blown Glass Creations",
       bprice: 853,
       price: 5000,
       catgeory: "Arts",
@@ -94,15 +94,15 @@ export const menulists = [
     {
       id: 3,
       image: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/09/nuron-art-demo-image-1-390x532.png",
-      title: "Ceramic Tea Sets with a Twist",
+      title: "Ceramic Tea Sets",
       bprice: 105,
-      price: 100,
+      price: 10000,
       catgeory: "Arts",
     },
     {
       id: 4,
       image: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/09/automotive_product-01-600x600.jpg",
-      title: "Vintage Motorcycles and Scooters",
+      title: "Vintage Motorcycles",
       bprice: 40000,
       price: 50000,
       catgeory: "Automotive",
@@ -110,7 +110,7 @@ export const menulists = [
     {
       id: 5,
       image: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/09/automotive_product-02-600x600.jpg",
-      title: "Off-Road Adventure Seekers",
+      title: "Off-Road Adventure",
       bprice: 4000,
       price: 8000,
       catgeory: "Automotive",
@@ -322,25 +322,25 @@ export const menulists = [
     {
       id: "01",
       title: "Sign up",
-      desc: "Sign your car up via our contact form or via the WhatsApp chat on the website. Send us a couple of pictures of the car that you want to put up for auction.",
+      desc: " Create an account to access the marketplace. Set up your profile, verify details, and start exploring auctions.",
       cover: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/01/shape-7.png",
     },
     {
       id: "02",
       title: "Auction goes online",
-      desc: "As soon as we collect enough cars for the auction (we strive for 25 to 40 cars per auction), the auction will show up on the website.",
+      desc: "Sellers list their items for auction with detailed descriptions, images, and a starting bid. Buyers can place bids in real time.",
       cover: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/09/auction.png",
     },
     {
       id: "03",
       title: "Closing auction",
-      desc: "After the viewing day(s) the auction is still a few days open for new bids. We evaluate the highest bid after the closing of an auction.",
+      desc: "When the auction timer ends, the highest bidder wins the item. The system finalizes the sale, and both parties receive confirmation.",
       cover: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/09/auction-2.png",
     },
     {
       id: "04",
       title: "The last steps",
-      desc: "After the car is sold to the highest bidder, all the cars will be collected by the buyers on a determined date.",
+      desc: "The seller sends the item, and the buyer completes the payment if not already processed.",
       cover: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/09/auction-3.png",
     },
   ];
@@ -384,7 +384,7 @@ export const menulists = [
     },
     {
       id: 7,
-      title: "Devmahbub",
+      title: "Devmah",
       profile: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/01/client-8-3.png",
       amount: "100",
     },
@@ -402,7 +402,7 @@ export const menulists = [
     },
     {
       id: 10,
-      title: "Alexander",
+      title: "Alex",
       profile: "https://rainbowthemes.net/themes/nuron/wp-content/uploads/2023/01/client-8.png",
       amount: "100",
     },
