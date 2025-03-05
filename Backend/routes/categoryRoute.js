@@ -6,7 +6,7 @@ const {
   updateCategory,
   deleteCategory,
 } = require("../controllers/categoryController");
-const { protect, isAdmin } = require("../middleWare/authMiddleWare");
+const { protect, isAdmin } = require("../middleware/authMiddleWare");
 
 const categoryRoute = express.Router();
 

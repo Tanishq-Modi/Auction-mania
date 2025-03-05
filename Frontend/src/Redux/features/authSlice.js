@@ -8,7 +8,6 @@ const initialState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
-    isLoggedIn: false,
     message: "",
 };
 
@@ -17,7 +16,6 @@ export const register = createAsyncThunk("auth/register", async (userData, thunk
     try {
         const response = await authService.register(userData);
         localStorage.setItem("user", JSON.stringify(response));
-        return response; // Ensure the response is returned
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
     }
@@ -31,7 +29,7 @@ const authSlice = createSlice({
             state.isError = false;
             state.isSuccess = false;
             state.isLoading = false;
-            state.message = ""; // Fixed incorrect type
+            state.message = "";
         },
     },
     extraReducers: (builder) => {
@@ -43,14 +41,14 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.isLoggedIn = true;
-                state.user = action.payload; // Ensure correct payload handling
+                state.user = action.payload; 
             })
             .addCase(register.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
-                state.message = action.payload; // Ensure error message is properly assigned
+                state.message = action.payload; 
                 state.user = null;
-                toast.error(action.payload); // Show toast error message
+                toast.error(action.payload);   
             });
     },
 });

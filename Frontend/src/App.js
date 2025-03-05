@@ -24,11 +24,17 @@ import {
   ScrollToTop,
   PrivateRoute,
 } from "./router/index.js";
+import { ToastContainer  } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"
+import axios from "axios";
+
+axios.defaults.withCredentials=true;
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer />
         <ScrollToTop />
         <Routes>
           <Route
