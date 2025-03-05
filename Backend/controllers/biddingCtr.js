@@ -1,8 +1,8 @@
 const asyncHandler = require("express-async-handler");
-const Product = require("../models/productModel");
-const BiddingProduct = require("../models/biddingModel");
+const Product = require("../model/productModel");
+const BiddingProduct = require("../model/biddingModel");
 const sendEmail = require("../utils/sendMail");
-const User = require("../models/UserModel");
+const User = require("../model/UserModel");
 
 const placeBid = asyncHandler(async (req, res) => {
   const { productId, price } = req.body;

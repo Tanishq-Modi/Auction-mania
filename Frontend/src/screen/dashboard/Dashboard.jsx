@@ -6,8 +6,10 @@ import { BsCashCoin } from "react-icons/bs";
 import { MdDashboard, MdOutlineCategory } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { HiOutlineUsers } from "react-icons/hi2";
+import { UseRedirectLoggedOutUser } from "../../hooks/useRedirectLoggedOutUser";
 
 export const Dashboard = () => {
+  UseRedirectLoggedOutUser("/login");
   const role = "admin";
   return (
     <>

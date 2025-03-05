@@ -7,6 +7,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Container, CustomNavLink, CustomNavLinkList, ProfileCard } from "../../router";
 import { User1 } from "../hero/Hero";
 import { menulists } from "../../utils/data";
+import { ShowOnlogin, ShowOnlogout } from "../../utils/HiddenLink";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,6 +42,8 @@ export const Header = () => {
   // Check if it's the home page
   const isHomePage = location.pathname === "/";
 
+
+
   const role = "buyer";
   return (
     <>
@@ -69,21 +72,27 @@ export const Header = () => {
               <div className="hidden lg:flex lg:items-center lg:gap-8">
                 <IoSearchOutline size={23} className={`${isScrolled || !isHomePage ? "text-black" : "text-white"}`} />
                 {role === "buyer" && (
+                  <ShowOnlogin>
                   <CustomNavLink href="/seller/login" className={`${isScrolled || !isHomePage ? "text-black" : "text-white"}`}>
                     Become a Seller
                   </CustomNavLink>
+                  </ShowOnlogin>
                 )}
+                <ShowOnlogout>
                 <CustomNavLink href="/login" className={`${isScrolled || !isHomePage ? "text-black" : "text-white"}`}>
                   Sign in
                 </CustomNavLink>
                 <CustomNavLink href="/register" className={`${!isHomePage || isScrolled ? "bg-green" : "bg-white"} px-8 py-2 rounded-full text-primary shadow-md`}>
                   Join
                 </CustomNavLink>
+                </ShowOnlogout>
+                <ShowOnlogin>
                 <CustomNavLink href="/dashboard">
                   <ProfileCard>
                     <img src={User1} alt="" className="w-full h-full object-cover" />
                   </ProfileCard>
                 </CustomNavLink>
+                </ShowOnlogin>
               </div>
               <div className={`icon flex items-center justify-center gap-6 ${isScrolled || !isHomePage ? "text-primary" : "text-white"}`}>
                 <button onClick={toggleMenu} className="lg:hidden w-10 h-10 flex justify-center items-center bg-black text-white focus:outline-none">

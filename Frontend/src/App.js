@@ -27,10 +27,22 @@ import {
 import { ToastContainer  } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getLogInStatus } from "./redux/features/authSlice.js";
 
 axios.defaults.withCredentials=true;
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getLogInStatus());
+
+    // if(isloggedIn && user==null){
+    //   //fatch user details
+    // }
+  },[dispatch])
   return (
     <>
       <BrowserRouter>
