@@ -8,8 +8,12 @@ import { Container, CustomNavLink, CustomNavLinkList, ProfileCard } from "../../
 import { User1 } from "../hero/Hero";
 import { menulists } from "../../utils/data";
 import { ShowOnlogin, ShowOnlogout } from "../../utils/HiddenLink";
+import { UseUserProfile } from "../../hooks/useUserProfile";
+import { useDispatch, useSelector } from "react-redux";
+import { getuserProfile, selectIsLoggedIn } from "../../redux/features/authSlice";
 
 export const Header = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
@@ -42,9 +46,17 @@ export const Header = () => {
   // Check if it's the home page
   const isHomePage = location.pathname === "/";
 
+    const {role} = UseUserProfile();
+    const dispatch = useDispatch();
+  
+    useEffect(()=>{
+      if(isLoggedIn){
+      dispatch(getuserProfile());
+      }
+    },[dispatch,isLoggedIn]);
 
 
-  const role = "buyer";
+
   return (
     <>
       <header className={isHomePage ? `header py-1 bg-primary ${isScrolled ? "scrolled" : ""}` : `header bg-white shadow-s1 ${isScrolled ? "scrolled" : ""}`}>
@@ -71,7 +83,7 @@ export const Header = () => {
             <div className="flex items-center gap-8 icons">
               <div className="hidden lg:flex lg:items-center lg:gap-8">
                 <IoSearchOutline size={23} className={`${isScrolled || !isHomePage ? "text-black" : "text-white"}`} />
-                {role === "buyer" && (
+                {isLoggedIn && role === "buyer" && (
                   <ShowOnlogin>
                   <CustomNavLink href="/seller/login" className={`${isScrolled || !isHomePage ? "text-black" : "text-white"}`}>
                     Become a Seller

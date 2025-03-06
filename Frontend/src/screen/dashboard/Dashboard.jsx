@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Title } from "../../router";
 import { CiMedal } from "react-icons/ci";
 import { GiBarbedStar } from "react-icons/gi";
@@ -7,10 +7,22 @@ import { MdDashboard, MdOutlineCategory } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { HiOutlineUsers } from "react-icons/hi2";
 import { UseRedirectLoggedOutUser } from "../../hooks/useRedirectLoggedOutUser";
+import { UseUserProfile } from "../../hooks/useUserProfile";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserIncome, getuserProfile } from "../../redux/features/authSlice";
 
 export const Dashboard = () => {
   UseRedirectLoggedOutUser("/login");
-  const role = "admin";
+  const {role} = UseUserProfile();
+  const {income} = useSelector((state)=>state.auth)
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getuserProfile());
+    dispatch(getUserIncome());
+  },[dispatch]);
+
+
   return (
     <>
       <section>
@@ -19,12 +31,13 @@ export const Dashboard = () => {
             My Activity
           </Title>
           <hr className="my-5" />
-
+{role ==="buyer" && <h1 className="text-xl text-center font-semibold text-green py-8">Please Become a Seller</h1>}
+          {role==="admin" || (role==="seller" && (
           <div className="grid grid-cols-3 gap-8 mt-8">
             <div className="shadow-s3 border border-green bg-green_100 p-8 flex items-center text-center justify-center gap-5 flex-col rounded-xl">
               <BsCashCoin size={80} className="text-green" />
               <div>
-                <Title level={1}>500 </Title>
+                <Title level={1}>{income?.balance} </Title>
                 <Title>Balance</Title>
               </div>
             </div>
@@ -61,6 +74,7 @@ export const Dashboard = () => {
               </>
             )}
           </div>
+          ))}
         </div>
       </section>
     </>

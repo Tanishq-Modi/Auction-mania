@@ -9,6 +9,7 @@ router.get("/loggedin", loginStatus);
 router.get("/logout", logoutuser); 
 router.post("/seller", loginAsSeller); 
 router.get("/getuser", protect, getUser);
+router.get("/sell-amount",protect,getuserBalance);
 
 
 router.get("/estimate-income", protect,isAdmin, estimateIncome);// only accessible to admin 

@@ -23,11 +23,37 @@ const getuserProfile = async ()=>{
     const response = await axios.get(AUTH_URL + "getuser");
     return response.data;
 };
+
+const loginUserAsSeller = async (userData)=>{
+    const response = await axios.post(`${AUTH_URL}/seller`,userData,{ withCredentials: true,
+    });
+    return response.data;
+};
+
+const getUserIncome = async ()=>{
+    const response = await axios.get(AUTH_URL + "sell-amount");
+    return response.data;
+};
+
+//only access for admin user
+const getIncome = async ()=>{
+    const response = await axios.get(AUTH_URL + "estimate-income");
+    return response.data;
+};
+const getAllUser = async ()=>{
+    const response = await axios.get(AUTH_URL + "users");
+    return response.data;
+};
+
 const authSerivce={
     register,
     login,
     logOut,
     getLogInStatus,
     getuserProfile,
+    loginUserAsSeller,
+    getUserIncome,
+    getIncome,
+    getAllUser,
 };
 export default authSerivce;

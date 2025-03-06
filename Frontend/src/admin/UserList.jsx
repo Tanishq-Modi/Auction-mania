@@ -2,8 +2,22 @@ import { NavLink } from "react-router-dom";
 import { Title, ProfileCard } from "../router";
 import { TiEyeOutline } from "react-icons/ti";
 import { User2 } from "../components/hero/Hero";
+import { UseRedirectLoggedOutUser } from "../hooks/useRedirectLoggedOutUser";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllUser } from "../redux/features/authSlice";
 
 export const UserList = () => {
+
+  UseRedirectLoggedOutUser("/login");
+    const { users } = useSelector((state)=>state.auth)
+    const dispatch = useDispatch();
+  
+    useEffect(()=>{
+      dispatch(getAllUser());
+    },[dispatch]);
+
+
   return (
     <section className="shadow-s1 p-8 rounded-lg">
       <div className="flex justify-between">
@@ -40,23 +54,25 @@ export const UserList = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white border-b hover:bg-gray-50">
-              <td className="px-6 py-4">1</td>
-              <td className="px-6 py-4 capitalize">Tanishq Modi</td>
-              <td className="px-6 py-4">example@gmail.com</td>
-              <td className="px-6 py-4 capitalize">Admin</td>
+          {users.map((user,index)=>(
+            <tr className="bg-white border-b hover:bg-gray-50" key={index}>
+              <td className="px-6 py-4">{index + 1}</td>
+              <td className="px-6 py-4 capitalize">{user?.name}</td>
+              <td className="px-6 py-4">{user?.email}</td>
+              <td className="px-6 py-4 capitalize">{user?.role}</td>
               <td className="px-6 py-4">
                 <ProfileCard>
-                  <img src={User2} alt={User2} />
+                  <img src={user?.photo} alt={user?.name} />
                 </ProfileCard>
               </td>
-              <td className="px-6 py-4">Dec 20 2024</td>
+              <td className="px-6 py-4">{user?.createdAt}</td>
               <td className="py-4 flex justify-end px-8">
                 <NavLink to="#" type="button" className="font-medium text-indigo-500">
                   <TiEyeOutline size={25} />
                 </NavLink>
               </td>
             </tr>
+          ))};
           </tbody>
         </table>
       </div>
