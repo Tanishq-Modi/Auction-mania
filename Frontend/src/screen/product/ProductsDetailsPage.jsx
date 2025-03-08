@@ -1,15 +1,31 @@
-import { Body, Caption, Container, Title } from "../../router";
+import { Body, Caption, Container, DateFormatter, Title } from "../../router";
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
 import { commonClassNameOfInput } from "../../components/common/Design";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UseRedirectLoggedOutUser } from "../../hooks/useRedirectLoggedOutUser";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../../redux/features/productSlice";
+import { useParams } from "react-router-dom";
 
 export const ProductsDetailsPage = () => {
-  const [activeTab, setActiveTab] = useState("description");
+  
+    UseRedirectLoggedOutUser("/");
+      const dispatch = useDispatch();
+      const {id} = useParams();
+
+      const [activeTab, setActiveTab] = useState("description");
+      const {product, isLoading}= useSelector((state)=>state.product);
+    
+      useEffect(()=>{
+        dispatch(getProduct(id));
+      },[dispatch,id]);
+  
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
   return (
     <>
       <section className="pt-24 px-8">
@@ -17,12 +33,12 @@ export const ProductsDetailsPage = () => {
           <div className="flex justify-between gap-8">
             <div className="w-1/2">
               <div className="h-[70vh]">
-                <img src="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-14.jpg" alt="" className="w-full h-full object-cover rounded-xl" />
+                <img src={product?.image?.filePath} alt="" className="w-full h-full object-cover rounded-xl" />
               </div>
             </div>
             <div className="w-1/2">
               <Title level={2} className="capitalize">
-                Couple Wedding Ring
+              {product?.title}
               </Title>
               <div className="flex gap-5">
                 <div className="flex text-green ">
@@ -35,11 +51,11 @@ export const ProductsDetailsPage = () => {
                 <Caption>(2 customer reviews)</Caption>
               </div>
               <br />
-              <Body>Korem ipsum dolor amet, consectetur adipiscing elit. Maece nas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla.</Body>
+              <Body>{product?.description.slice(0,150)}</Body>
               <br />
               <Caption>Item condition: New</Caption>
               <br />
-              <Caption>Item Verifed: Yes</Caption>
+              <Caption>Item Verifed: {product?.isverify ? "Yes" : "No"}</Caption>
               <br />
               <Caption>Time left:</Caption>
               <br />
@@ -64,16 +80,16 @@ export const ProductsDetailsPage = () => {
               <br />
               <Title className="flex items-center gap-2">
                 Auction ends:
-                <Caption>December 31, 2024 12:00 am</Caption>
+                <Caption><DateFormatter date={product?.createdAt}/></Caption>
               </Title>
               <Title className="flex items-center gap-2 my-5">
                 Timezone: <Caption>UTC 0</Caption>
               </Title>
               <Title className="flex items-center gap-2 my-5">
-                Price:<Caption>$200 </Caption>
+                Price:<Caption>${product?.price}</Caption>
               </Title>
               <Title className="flex items-center gap-2">
-                Current bid:<Caption className="text-3xl">$500 </Caption>
+                Current bid:<Caption className="text-3xl">${product?.price} </Caption>
               </Title>
               <div className="p-5 px-10 shadow-s3 py-8">
                 <form className="flex gap-3 justify-between">
@@ -110,14 +126,7 @@ export const ProductsDetailsPage = () => {
                   <Title level={4}>Description</Title>
                   <br />
                   <Caption className="leading-7">
-                    If you’ve been following the crypto space, you’ve likely heard of Non-Fungible Tokens (Biddings), more popularly referred to as ‘Crypto Collectibles.’ The world of Biddings is
-                    growing rapidly. It seems there is no slowing down of these assets as they continue to go up in price. This growth comes with the opportunity for people to start new businesses to
-                    create and capture value. The market is open for players in every kind of field. Are you a collector.
-                  </Caption>
-                  <Caption className="leading-7">
-                    If you’ve been following the crypto space, you’ve likely heard of Non-Fungible Tokens (Biddings), more popularly referred to as ‘Crypto Collectibles.’ The world of Biddings is
-                    growing rapidly. It seems there is no slowing down of these assets as they continue to go up in price. This growth comes with the opportunity for people to start new businesses to
-                    create and capture value. The market is open for players in every kind of field. Are you a collector.
+                    {product?.description}
                   </Caption>
                   <br />
                   <Title level={4}>Product Overview</Title>
@@ -125,52 +134,53 @@ export const ProductsDetailsPage = () => {
                     <div className="mt-4 capitalize w-1/2">
                       <div className="flex justify-between border-b py-3">
                         <Title>category</Title>
-                        <Caption>Category</Caption>
+                        <Caption>{product?.category}</Caption>
                       </div>
                       <div className="flex justify-between border-b py-3">
                         <Title>height</Title>
-                        <Caption> 200 (cm)</Caption>
+                        <Caption> {product?.height} (cm)</Caption>
                       </div>
                       <div className="flex justify-between border-b py-3">
                         <Title>length</Title>
-                        <Caption> 300 (cm)</Caption>
+                        <Caption> {product?.lengthpic} (cm)</Caption>
                       </div>
                       <div className="flex justify-between border-b py-3">
                         <Title>width</Title>
-                        <Caption> 400 (cm)</Caption>
+                        <Caption> {product?.width} (cm)</Caption>
                       </div>
                       <div className="flex justify-between border-b py-3">
                         <Title>weigth</Title>
-                        <Caption> 50 (kg)</Caption>
+                        <Caption> {product?.weigth} (kg)</Caption>
                       </div>
                       <div className="flex justify-between py-3 border-b">
                         <Title>medium used</Title>
-                        <Caption> Gold </Caption>
+                        <Caption> {product?.mediumused
+                        } </Caption>
                       </div>
                       <div className="flex justify-between py-3 border-b">
                         <Title>Price</Title>
-                        <Caption> $50000 </Caption>
+                        <Caption> ${product?.price}</Caption>
                       </div>
                       <div className="flex justify-between py-3 border-b">
-                        <Title>Sold out</Title>
+                        <Title>{product?.isSoldout? "Sold Out" : "In Stock"}</Title>
                         Yes
                       </div>
                       <div className="flex justify-between py-3 border-b">
                         <Title>verify</Title>
-                        No
+                        {product?.isverify? "Yes" : "No"}
                       </div>
                       <div className="flex justify-between py-3 border-b">
                         <Title>Create At</Title>
-                        <Caption>December 31, 2024 12:00 am</Caption>
+                        <Caption><DateFormatter date={product?.createdAt} /></Caption>
                       </div>
                       <div className="flex justify-between py-3">
                         <Title>Update At</Title>
-                        <Caption>December 31, 2024 12:00 am</Caption>
+                        <Caption><DateFormatter date={product?.updatedAt} /></Caption>
                       </div>
                     </div>
                     <div className="w-1/2">
                       <div className="h-[60vh] p-2 bg-green rounded-xl">
-                        <img src="https://bidout-wp.b-cdn.net/wp-content/uploads/2022/10/Image-14.jpg" alt="" className="w-full h-full object-cover rounded-xl" />
+                        <img src={product?.image?.filePath} alt="" className="w-full h-full object-cover rounded-xl" />
                       </div>
                     </div>
                   </div>
@@ -188,7 +198,7 @@ export const ProductsDetailsPage = () => {
                   </Title>
                 </div>
               )}
-              {activeTab === "moreProducts" && (
+              {activeTab === "morePro ducts" && (
                 <div className="more-products-tab shadow-s3 p-8 rounded-md">
                   <h1>More Products</h1>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { PrimaryButton, Title } from "../../../router";
+import { Loader, PrimaryButton, Title } from "../../../router";
 import { NavLink } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { UseRedirectLoggedOutUser } from "../../../hooks/useRedirectLoggedOutUser";
@@ -10,11 +10,25 @@ import { Table } from "../../../components/Table";
 export const ProductList = () => {
   UseRedirectLoggedOutUser("/");
   const dispatch = useDispatch();
-  const {userproducts}= useSelector((state)=>state.product);
+  const {userproducts, isLoading}= useSelector((state)=>state.product);
 
   useEffect(()=>{
     dispatch(getAllProductOfUser());
   },[dispatch]);
+
+
+  if(isLoading){
+        return <Loader />
+      }
+  
+      if(userproducts?.length===0){
+        return (
+          <div className="flex justify-center items-center h-auto w-auto">
+          <h2 className="text-3xl text-gray-700">No Products Found</h2>
+        </div>
+  
+        )
+      }
 
   const handleDeleteProduct =async(id)=>{
     await dispatch(deleteProduct(id));
@@ -36,7 +50,7 @@ export const ProductList = () => {
           </NavLink>
         </div>
         <hr className="my-5" />
-        <Table products={userproducts} handleDeleteProduct={handleDeleteProduct}/>
+        <Table products={userproducts} handleDeleteProduct={handleDeleteProduct} />
       </section>
     </>
   );

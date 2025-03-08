@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Title, ProfileCard } from "../router";
+import { Title, ProfileCard, DateFormatter } from "../router";
 import { TiEyeOutline } from "react-icons/ti";
 import { User2 } from "../components/hero/Hero";
 import { UseRedirectLoggedOutUser } from "../hooks/useRedirectLoggedOutUser";
@@ -65,7 +65,7 @@ export const UserList = () => {
                   <img src={user?.photo} alt={user?.name} />
                 </ProfileCard>
               </td>
-              <td className="px-6 py-4">{user?.createdAt}</td>
+              <td className="px-6 py-4">< DateFormatter date={user?.createdAt} /></td>
               <td className="py-4 flex justify-end px-8">
                 <NavLink to="#" type="button" className="font-medium text-indigo-500">
                   <TiEyeOutline size={25} />

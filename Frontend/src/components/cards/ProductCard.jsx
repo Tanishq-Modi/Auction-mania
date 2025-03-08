@@ -11,7 +11,7 @@ export const ProductCard = ({ item }) => {
       <div className="bg-white shadow-s1 rounded-xl p-3">
         <div className="h-56 relative overflow-hidden">
           <NavLink to={`/details/${item?._id}`}>
-            <img src={item?.image} alt={item?.image} className="w-full h-full object-cover rounded-xl hover:scale-105 hover:cursor-pointer transition-transform duration-300 ease-in-out" />
+            <img src={item?.image.filePath} alt={item?.image?.fileName} className="w-full h-full object-cover rounded-xl hover:scale-105 hover:cursor-pointer transition-transform duration-300 ease-in-out" />
           </NavLink>
           <ProfileCard className="shadow-s1 absolute right-3 bottom-3">
             <RiAuctionFill size={22} className="text-green" />
@@ -29,7 +29,7 @@ export const ProductCard = ({ item }) => {
           </div>
         </div>
         <div className="details mt-4">
-          <Title className="uppercase">{item.title}</Title>
+          <Title className="uppercase">{item.title.slice(0, 30)}</Title>
           <hr className="mt-3" />
           <div className="flex items-center justify-between py-4">
             <div className="flex items-center justify-between gap-5">
@@ -48,7 +48,7 @@ export const ProductCard = ({ item }) => {
               </div>
               <div>
                 <Caption className="text-red-500">Buy Now</Caption>
-                <Title>${item?.price}.00</Title>
+                <Title>${item?.price}.0</Title>
               </div>
             </div>
           </div>
