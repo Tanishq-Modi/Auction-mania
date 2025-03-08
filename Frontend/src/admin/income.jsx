@@ -6,14 +6,13 @@ import { getIncome } from "../redux/features/authSlice";
 import { useEffect } from "react";
 
 export const Income = () => {
-
   UseRedirectLoggedOutUser("/login");
-    const {income} = useSelector((state)=>state.auth)
-    const dispatch = useDispatch();
-  
-    useEffect(()=>{
-      dispatch(getIncome());
-    },[dispatch]);
+  const { income } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getIncome());
+  }, [dispatch]);
 
   return (
     <>
@@ -26,7 +25,10 @@ export const Income = () => {
           <div className="shadow-s3 py-16 my-16 border border-green bg-green_100 p-8 flex items-center text-center justify-center gap-5 flex-col rounded-xl">
             <CgDollar size={80} className="text-green" />
             <div>
-              <Title level={1}>${income?.commissionBalance}</Title>
+              <Title level={1}>
+                ${income?.commissionBalance?.toFixed(2) ?? "0.00"}
+              </Title>
+
               <Title>Total Income</Title>
             </div>
           </div>

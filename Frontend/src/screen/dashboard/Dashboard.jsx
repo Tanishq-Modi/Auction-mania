@@ -16,7 +16,7 @@ export const Dashboard = () => {
   UseRedirectLoggedOutUser("/login");
   const { role } = UseUserProfile();
   const { income, users } = useSelector((state) => state.auth);
-  const { products, userproducts, wonedproducts, product } = useSelector((state) => state.product);
+  const { products, userproducts, wonedproducts } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
   useEffect(() => {

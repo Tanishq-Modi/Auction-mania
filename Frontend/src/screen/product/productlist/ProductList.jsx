@@ -6,6 +6,7 @@ import { UseRedirectLoggedOutUser } from "../../../hooks/useRedirectLoggedOutUse
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getAllProductOfUser } from "../../../redux/features/productSlice";
 import { Table } from "../../../components/Table";
+import { sellproductsbyuser } from "../../../redux/features/biddingSlice";
 
 export const ProductList = () => {
   UseRedirectLoggedOutUser("/");
@@ -34,6 +35,12 @@ export const ProductList = () => {
     await dispatch(deleteProduct(id));
     await dispatch(getAllProductOfUser());
   }
+  const handleSellProduct = async (productId) => {
+    await dispatch(sellproductsbyuser(productId)); 
+    await dispatch(getAllProductOfUser());
+  };
+  
+  
 
   return (
     <>
@@ -50,7 +57,7 @@ export const ProductList = () => {
           </NavLink>
         </div>
         <hr className="my-5" />
-        <Table products={userproducts} handleDeleteProduct={handleDeleteProduct} />
+        <Table products={userproducts} handleDeleteProduct={handleDeleteProduct} handleSellProduct={handleSellProduct}/>
       </section>
     </>
   );

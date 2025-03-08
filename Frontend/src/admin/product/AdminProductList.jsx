@@ -2,9 +2,8 @@ import { Loader, Title } from "../../router";
 import { Table } from "../../components/Table";
 import { UseRedirectLoggedOutUser } from "../../hooks/useRedirectLoggedOutUser";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProduct } from "../../redux/features/productSlice";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
+import { getAllProduct } from "../../redux/features/productSlice";
 
 export const AdminProductList = () => {
    UseRedirectLoggedOutUser("/");
@@ -29,6 +28,7 @@ export const AdminProductList = () => {
       )
     }
 
+
   return (
     <>
       <section className="shadow-s1 p-8 rounded-lg">
@@ -38,7 +38,7 @@ export const AdminProductList = () => {
           </Title>
         </div>
         <hr className="my-5" />
-        <Table products={products} isAdmin={true}/>
+        <Table products={products} isAdmin={true} />
       </section>
     </>
   );
