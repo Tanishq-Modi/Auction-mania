@@ -1,1 +1,1 @@
-export const BACKEND_URL ="https://auction-mania-backend.onrender.com";
+export const BACKEND_URL ="https://auction-mania-backend.onrender.com/";
