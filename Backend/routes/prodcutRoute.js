@@ -13,7 +13,7 @@ const {
   getWonProducts,
 } = require("../controllers/productController");
 const { upload } = require("../utils/fileUpload");
-const { protect, isSeller, isAdmin } = require("../middleWare/authMiddleWare");
+const { protect, isSeller, isAdmin } = require("../middleware/authMiddleWare");
 const router = express.Router();
 
 router.post("/", protect, isSeller, upload.single("image"), createProduct);
