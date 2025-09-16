@@ -45,10 +45,10 @@ export const Hero = () => {
           <div className="w-full md:w-1/2 my-16 relative py-16">
             <img src="../images/home/hero.webp" alt="" />
             <div className="horiz-move absolute md:top-28 top-8 left-0">
-              <Box title="Proof of quality" desc="Lorem Ipsum Dolar Amet" />
+              <Box title="Proof of quality" desc="Checked by professionals" />
             </div>
             <div className="horiz-move absolute bottom-72 right-0">
-              <Box title="Safe and secure" desc="Lorem Ipsum Dolar Amet" />
+              <Box title="Safe and secure" desc="Trust is gained!" />
             </div>
 
             <div className="px-5 py-4 bg-white shadow-md flex items-center gap-5 rounded-xl ml-5 -mt-5 vert-move w-1/2">
